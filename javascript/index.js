@@ -16,26 +16,27 @@ let sydneyDate=moment().tz("Australia/Sydney");
 sydneyDateElement.innerHTML=sydneyDate.format ("dddd, MMMM Do YYYY");
 sydneyTimeElement.innerHTML=sydneyDate.format ("HH:mm:ss [<small>]a[<small>]");
 }
-setInterval (loadtime, 1000);
+
+
 
 function updateCity (event){
 let cityTimeZone=event.target.value;
+let cityName = cityTimeZone.replace("_", " ").split("/")[1];
 let cityTime=moment().tz(cityTimeZone);
 let citiesElement=document.querySelector ("#cities");
 citiesElement.innerHTML=`
 <div class="city">
     <div>
-    <h2>${cityTimeZone}</h2>
+    <h2>${cityName}</h2>
     <div class="date">${cityTime.format ("MMMM Do YYYY")}</div>
-    </div>
-    <div class="time" ${cityTime.format ("hh:mm:ss")}
-  </div>`;
-
+    <div class="time"> ${cityTime.format ("hh:mm:ss")}</div>
+  </div>
+</div>`;
 
 }
 
 
-
+setInterval (loadtime, 1000);
 
 let citiesSelectElement=document.querySelector ("#city");
 citiesSelectElement.addEventListener ("change",updateCity);
